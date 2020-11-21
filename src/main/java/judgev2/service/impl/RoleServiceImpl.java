@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityNotFoundException;
 
 @Service
@@ -20,6 +21,17 @@ public class RoleServiceImpl implements RoleService {
     public RoleServiceImpl(RoleRepository roleRepository, ModelMapper modelMapper) {
         this.roleRepository = roleRepository;
         this.modelMapper = modelMapper;
+    }
+
+    @PostConstruct
+    public void init() {
+        if (this.roleRepository.count() == 0) {
+            Role admin = new Role("ADMIN");
+            Role user = new Role("USER");
+
+            this.roleRepository.save(admin);
+            this.roleRepository.save(user);
+        }
     }
 
     @Override
