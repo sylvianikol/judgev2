@@ -38,7 +38,7 @@ public class RoleServiceImpl implements RoleService {
     public RoleServiceModel findByName(String name) {
         Role role = this.roleRepository.findByName(name).orElseThrow(
                 () -> new EntityNotFoundException(
-                        String.format("Role '%s' does not exists!", name))
+                        String.format("%s '%s' does not exists!", Role.class.getSimpleName(), name))
         );
 
         return this.modelMapper.map(role, RoleServiceModel.class);

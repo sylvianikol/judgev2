@@ -9,6 +9,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+
+import static judgev2.constants.ErrorMessages.ENTITY_NOT_EXISTS;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -34,5 +38,12 @@ public class UserServiceImpl implements UserService {
         this.userRepository.saveAndFlush(user);
 
         return this.modelMapper.map(user, UserServiceModel.class);
+    }
+
+    @Override
+    public UserServiceModel findByUsername(String username) {
+        return this.userRepository.findByUsername(username)
+                .map(user -> this.modelMapper.map(user, UserServiceModel.class))
+                .orElse(null);
     }
 }
