@@ -12,7 +12,7 @@ public class ErrorMessages {
             "Enter a valid email address: ex. 'user@mail.com'";
 
     public static final String INVALID_GITHUB_URL =
-            "Enter git address following this pattern: 'https:/github.com/{username}/{dir}/…'";
+            "Enter git address following this pattern: 'https://github.com/{username}/{dir}/…'";
 
     public static final String ENTITY_NOT_EXISTS =
             "%s '%s' does not exists!";

@@ -7,6 +7,7 @@ import judgev2.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -73,17 +74,21 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String register() {
+    public String register(@Valid @ModelAttribute("userAddBindingModel")
+                                       UserAddBindingModel userAddBindingModel,
+                           BindingResult bindingResult) {
         return "register";
     }
 
     @PostMapping("/register")
     public ModelAndView registerConfirm(@Valid @ModelAttribute("userAddBindingModel")
                                                     UserAddBindingModel userAddBindingModel,
-                                        BindingResult bindingResult, ModelAndView modelAndView) {
+                                        BindingResult bindingResult, ModelAndView modelAndView,
+                                        RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            // TODO: validation messages
+
+            redirectAttributes.addFlashAttribute("userAddBindingModel", userAddBindingModel);
             modelAndView.setViewName("redirect:/users/register");
         } else {
             UserServiceModel userServiceModel =
