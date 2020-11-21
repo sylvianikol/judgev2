@@ -1,6 +1,7 @@
 package judgev2.web;
 
 import judgev2.model.binding.UserAddBindingModel;
+import judgev2.model.binding.UserLoginBindingModel;
 import judgev2.model.service.UserServiceModel;
 import judgev2.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -33,6 +35,26 @@ public class UserController {
         return "login";
     }
 
+    @PostMapping("/login")
+    public ModelAndView loginConfirm(@Valid @ModelAttribute("userLoginBindingModel")
+                                                 UserLoginBindingModel userLoginBindingModel,
+                                     BindingResult bindingResult, ModelAndView modelAndView,
+                                     HttpSession httpSession) {
+        if (bindingResult.hasErrors()) {
+            //TODO: validation messages
+            modelAndView.setViewName("redirect:/users/login");
+        } else {
+
+            // TODO: login in UserService
+            // httpSession.getAttribute("user", "userServiceModel")
+            // httpSession.getAttribute("id", "userId")
+
+            modelAndView.setViewName("redirect:/home");
+        }
+
+        return modelAndView;
+    }
+
     @GetMapping("/register")
     public String register() {
         return "register";
@@ -44,6 +66,7 @@ public class UserController {
                                         BindingResult bindingResult, ModelAndView modelAndView) {
 
         if (bindingResult.hasErrors()) {
+            // TODO: validation messages
             modelAndView.setViewName("redirect:/users/register");
         } else {
             UserServiceModel userServiceModel =
