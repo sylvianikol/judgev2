@@ -32,7 +32,7 @@ public class ExerciseController {
     @GetMapping("/add")
     public String add(@Valid @ModelAttribute("exerciseAddBindingModel")
                                   ExerciseAddBindingModel exerciseAddBindingModel,
-                      BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                      BindingResult bindingResult) {
         return "exercise-add";
     }
 
@@ -45,7 +45,7 @@ public class ExerciseController {
             redirectAttributes.addFlashAttribute("exerciseAddBindingModel", exerciseAddBindingModel);
             return "redirect:/exercise/add";
         } else {
-           
+
             ExerciseServiceModel exerciseServiceModel = this.modelMapper.map(exerciseAddBindingModel, ExerciseServiceModel.class);
             this.exerciseService.addExercise(exerciseServiceModel);
             return "redirect:/";
