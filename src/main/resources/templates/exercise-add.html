@@ -25,44 +25,38 @@
                 </div>
                 <div class="row mt-4 tm-edit-product-row">
                     <div class="col-xl-7 col-lg-7 col-md-12">
-                        <form action="#" method=""
-                              class="tm-edit-product-form" >
+                        <form th:action="@{/exercise/add}" th:object="${exerciseAddBindingModel}" th:method="POST" class="tm-edit-product-form" >
                             <div class="input-group mb-3">
                                 <label for="name" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Name
                                 </label>
-                                <input id="name" name="name" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"/>
+                                <input id="name" name="name" type="text"
+                                       th:field="*{name}" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"/>
 
                             </div>
                             <div class="input-group mb-3 justify-content-center">
-                                
-                                    <small class="text-danger">Exercise name length must be more than 2 characters</small>
-                                
+                                    <small th:each="e : ${#fields.errors('name')}" th:text="${e}" class="text-danger"></small>
                             </div>
                             <div class="input-group mb-3">
                                 <label for="startedOn" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">StartedOn Date
                                 </label>
                                 <input id="startedOn" name="startedOn" type="datetime-local"
-                                       class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
+                                       th:field="*{startedOn}" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
                                        data-large-mode="true"/>
 
                             </div>
                             <div class="input-group mb-3 justify-content-center">
-                                
-                                    <small class="text-danger">The date cannot be in the future!</small>
-                                
+                                    <small th:each="e : ${#fields.errors('startedOn')}" th:text="${e}" class="text-danger"></small>
                             </div>
                             <div class="input-group mb-3 ">
 
                                 <label for="dueDate" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Due Date
                                 </label>
                                 <input id="dueDate" name="dueDate" type="datetime-local"
-                                       class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
+                                       th:field="*{dueDate}" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
                                        data-large-mode="true"/>
                             </div>
                             <div class="input-group mb-3 justify-content-center">
-                                
-                                    <small class="text-danger" >The date cannot be in the past!</small>
-                               
+                                    <small th:each="e : ${#fields.errors('dueDate')}" th:text="${e}" class="text-danger" ></small>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="ml-auto col-xl-8 col-lg-8 col-md-8 col-sm-7 pl-0">

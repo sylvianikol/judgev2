@@ -16,4 +16,13 @@ public class ErrorMessages {
 
     public static final String ENTITY_NOT_EXISTS =
             "%s '%s' does not exists!";
+
+    public static final String INVALID_EXERCISE_NAME =
+            "Exercise name length must be more than 2 characters";
+
+    public static final String INVALID_START_DATE =
+            "The date cannot be in the future!";
+
+    public static final String INVALID_DUE_DATE =
+            "The date cannot be in the past!";
 }
