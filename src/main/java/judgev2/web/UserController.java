@@ -54,10 +54,10 @@ public class UserController {
             modelAndView.setViewName("redirect:/users/login");
         } else {
             UserServiceModel userServiceModel =
-                    this.userService.findByUsername(userLoginBindingModel.getUsername());
+                    this.userService.findByUsername(userLoginBindingModel.getUsername().trim());
 
             if (userServiceModel == null || !userServiceModel.getPassword()
-                    .equals(userLoginBindingModel.getPassword())) {
+                    .equals(userLoginBindingModel.getPassword().trim())) {
 
                 redirectAttributes.addFlashAttribute("notFound", true);
                 redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
@@ -66,7 +66,7 @@ public class UserController {
                 httpSession.setAttribute("user", userServiceModel);
                 httpSession.setAttribute("id", userServiceModel.getId());
                 httpSession.setAttribute("role", userServiceModel.getRole().getName());
-                modelAndView.setViewName("redirect:/home");
+                modelAndView.setViewName("redirect:/");
             }
         }
 

@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Judgev2Application {
 
     public static void main(String[] args) {
-        System.setProperty("spring.devtools.restart.enabled", "true");
         SpringApplication.run(Judgev2Application.class, args);
     }
 
